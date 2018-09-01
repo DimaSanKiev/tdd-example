@@ -35,13 +35,13 @@ public class TemplateTest {
 
     @Test
     public void multipleVariables() throws Exception {
-        assertTeamplateEvaluatesTo("1, 2, 3");
+        assertTemplateEvaluatesTo("1, 2, 3");
     }
 
     @Test
     public void unknownVariablesAreIgnored() throws Exception {
         template.set("doesnotexist", "whatever");
-        assertTeamplateEvaluatesTo("1, 2, 3");
+        assertTemplateEvaluatesTo("1, 2, 3");
     }
 
     @Test(expected = MissingValueException.class)
@@ -59,7 +59,7 @@ public class TemplateTest {
         }
     }
 
-    private void assertTeamplateEvaluatesTo(String expected) {
+    private void assertTemplateEvaluatesTo(String expected) {
         assertEquals(expected, template.evaluate());
     }
 }
