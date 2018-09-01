@@ -43,6 +43,11 @@ public class TemplateTest {
         assertTeamplateEvaluatesTo("1, 2, 3");
     }
 
+    @Test(expected = MissingValueException.class)
+    public void testMissingValueRaisesException() throws Exception {
+        new Template("${foo}").evaluate();
+    }
+
     private void assertTeamplateEvaluatesTo(String expected) {
         assertEquals(expected, template.evaluate());
     }
