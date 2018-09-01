@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class TemplateTest {
 
@@ -46,6 +47,16 @@ public class TemplateTest {
     @Test(expected = MissingValueException.class)
     public void testMissingValueRaisesException() throws Exception {
         new Template("${foo}").evaluate();
+    }
+
+    @Test
+    public void testMissingValueRaisesExceptionWithDetails() {
+        try {
+            new Template("${foo}").evaluate();
+            fail("evaluate() should throw an exception if a variable was left without a value");
+        } catch (MissingValueException expected) {
+            assertEquals("No value for ${foo}", expected.getMessage());
+        }
     }
 
     private void assertTeamplateEvaluatesTo(String expected) {
